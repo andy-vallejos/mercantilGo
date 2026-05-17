@@ -21,10 +21,8 @@ export default function StatsScreen() {
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
       <View style={styles.header}>
         <View style={styles.logoRow}>
-          <View style={styles.avatarMock} />
           <Text style={styles.logoText}>MercantilanGO</Text>
         </View>
-        <Text style={styles.notificationIcon}>👤</Text>
       </View>
 
       <ScrollView
@@ -217,7 +215,7 @@ const styles = StyleSheet.create({
     backgroundColor: CONFIG.colors.primary,
   },
   logoText: {
-    fontSize: 20,
+    fontSize: 28,
     fontWeight: "800",
     color: CONFIG.colors.text,
   },

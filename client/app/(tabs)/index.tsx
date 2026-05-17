@@ -360,16 +360,15 @@ export default function HomeScreen() {
       >
         <View style={styles.header}>
           <View style={styles.logoContainer}>
-            <View style={styles.avatar} />
-            <Text style={styles.logoText}>MercantilGo</Text>
+            <Text style={styles.logoText}>MercantilanGO</Text>
           </View>
 
           <View style={{ flexDirection: "row", alignItems: "center", gap: 14 }}>
-            <Text style={styles.notification}>👤</Text>
+          
 
             <Link href="/user-info" asChild>
               <Pressable android_ripple={{ color: "#00000010" }}>
-                <Text style={styles.profileLink}>Perfil</Text>
+                  <Text style={styles.notification}>👤</Text>
               </Pressable>
             </Link>
           </View>

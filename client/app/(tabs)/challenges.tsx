@@ -52,10 +52,8 @@ export default function ChallengesScreen() {
         >
           <View style={styles.userHeaderRow}>
             <View style={styles.userProfileBox}>
-              <View style={styles.userAvatarFallback}>
-                <Text style={styles.userAvatarIcon}>👤</Text>
-              </View>
-              <Text style={styles.userProfileName}>MercantilGo</Text>
+             
+              <Text style={styles.userProfileName}>MercantilanGO</Text>
             </View>
             <Pressable style={styles.notificationButton}>
               <Text style={styles.notificationIcon}>🔔</Text>
@@ -214,9 +212,6 @@ export default function ChallengesScreen() {
       >
         <View style={styles.header}>
           <View style={styles.headerLeft}>
-            <View style={styles.headerAvatar}>
-              <Text style={styles.headerAvatarIcon}>🤖</Text>
-            </View>
             <Text style={styles.headerTitle}>Desafíos</Text>
           </View>
           <Pressable

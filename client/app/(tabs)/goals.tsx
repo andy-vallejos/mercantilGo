@@ -42,10 +42,8 @@ export default function GoalsScreen() {
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
       <View style={styles.header}>
         <View style={styles.logoRow}>
-          <Text style={styles.logoIcon}>📱</Text>
           <Text style={styles.logoText}>MercantilanGO</Text>
         </View>
-        <Text style={styles.notificationIcon}>👤</Text>
       </View>
 
       <ScrollView
@@ -246,7 +244,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   logoText: {
-    fontSize: 20,
+    fontSize: 28,
     fontWeight: "800",
     color: CONFIG.colors.text,
   },
