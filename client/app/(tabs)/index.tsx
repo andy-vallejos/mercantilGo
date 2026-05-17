@@ -424,33 +424,6 @@ export default function HomeScreen() {
           </View>
         </View>
 
-<<<<<<< HEAD
-=======
-        {/* META */}
-        <View style={styles.goalCard}>
-          <View style={styles.goalHeader}>
-            <View>
-              <Text style={styles.goalLabel}>META ACTUAL</Text>
-              <Text style={styles.goalTitle}>PlayStation 5</Text>
-            </View>
-            <View>
-              <Text style={styles.goalLabel}>PROGRESO</Text>
-              <Text style={styles.goalProgress}>75%</Text>
-            </View>
-          </View>
-
-          <View style={styles.progressBarBackground}>
-            <View style={styles.progressBarFill} />
-          </View>
-
-          <View style={styles.progressValues}>
-            <Text style={styles.progressMin}>0 Bs</Text>
-            <Text style={styles.progressMax}>2.000 Bs</Text>
-          </View>
-        </View>
-
-        {/* INGRESOS */}
->>>>>>> fa438da15904ee1d05e21fc629d5f3b7cd69a316
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Ingresos Recientes</Text>
 
@@ -484,7 +457,8 @@ export default function HomeScreen() {
         {/* MENSAJE */}
         <View style={styles.messageCard}>
           <Text style={styles.messageText}>
-            ¡Vas por buen camino, Carlos! Tu meta del PS5 está cada vez más cerca.
+            ¡Vas por buen camino, Carlos! Tu meta del PS5 está cada vez más
+            cerca.
           </Text>
         </View>
       </ScrollView>
@@ -529,16 +503,6 @@ const styles = StyleSheet.create({
   notification: {
     fontSize: 22,
   },
-<<<<<<< HEAD
-=======
-
-  profileLink: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#0A2A1A",
-  },
-
->>>>>>> fa438da15904ee1d05e21fc629d5f3b7cd69a316
   welcomeContainer: {
     marginBottom: 24,
   },
@@ -1052,7 +1016,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginTop: -2,
   },
-<<<<<<< HEAD
   qrSectionLabel: {
     fontSize: 18,
     fontWeight: "800",
@@ -1061,6 +1024,3 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
-=======
-});
->>>>>>> fa438da15904ee1d05e21fc629d5f3b7cd69a316
