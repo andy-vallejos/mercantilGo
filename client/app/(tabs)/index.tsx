@@ -1,11 +1,258 @@
 import React, { useState } from "react";
 import { Link } from "expo-router";
-import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  TextInput,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const [showDetails, setShowDetails] = useState(false);
+  const [showAhorrar, setShowAhorrar] = useState(false);
+  const [showTransferir, setShowTransferir] = useState(false);
+  const [amount, setAmount] = useState("200");
 
+  // Vista: Transferencias (Se activa al pulsar "💵 Transferir")
+  if (showTransferir) {
+    return (
+      <SafeAreaView style={[styles.safeArea, { backgroundColor: "#F5F6F2" }]}>
+        {/* Header superior verde oscuro */}
+        <View style={styles.transferHeaderContainer}>
+          <View style={styles.transferHeaderTopRow}>
+            <Pressable
+              onPress={() => setShowTransferir(false)}
+              style={styles.transferBackButton}
+            >
+              <Text style={styles.transferBackArrow}>←</Text>
+            </Pressable>
+            <View style={styles.transferMenuIcon}>
+              <View style={styles.menuLine} />
+              <View style={styles.menuLine} />
+              <View style={styles.menuLine} />
+            </View>
+          </View>
+          <Text style={styles.transferHeaderTitle}>Transferencias</Text>
+        </View>
+
+        {/* Cuerpo con Scroll para las opciones */}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={[styles.container, styles.containerAhorrar]}
+        >
+          {/* Botón: A cuentas propias o registradas */}
+          <Pressable
+            style={styles.transferMainCard}
+            android_ripple={{ color: "#00000010" }}
+          >
+            <View style={styles.transferIconCircleGreen}>
+              <Text style={styles.transferIconText}>⇄</Text>
+            </View>
+            <Text style={styles.transferCardText}>
+              A cuentas propias o registradas
+            </Text>
+          </Pressable>
+
+          {/* Botón: A nuevo destinatario */}
+          <Pressable
+            style={styles.transferSecondaryCard}
+            android_ripple={{ color: "#00000010" }}
+          >
+            <View style={styles.transferIconCircleGray}>
+              <Text style={styles.transferIconText}>＋</Text>
+            </View>
+            <Text style={styles.transferCardText}>A nuevo destinatario</Text>
+          </Pressable>
+
+          {/* Lista de enlaces inferiores */}
+          <View style={styles.transferLinkList}>
+            <Pressable
+              style={styles.transferLinkItem}
+              android_ripple={{ color: "#00000005" }}
+            >
+              <Text style={styles.transferLinkText}>
+                Transferencias recientes
+              </Text>
+              <View style={styles.transferArrowCircle}>
+                <Text style={styles.transferArrowText}>›</Text>
+              </View>
+            </Pressable>
+
+            <Pressable
+              style={styles.transferLinkItem}
+              android_ripple={{ color: "#00000005" }}
+            >
+              <Text style={styles.transferLinkText}>
+                Transferencias agendadas
+              </Text>
+              <View style={styles.transferArrowCircle}>
+                <Text style={styles.transferArrowText}>›</Text>
+              </View>
+            </Pressable>
+
+            <Pressable
+              style={styles.transferLinkItem}
+              android_ripple={{ color: "#00000005" }}
+            >
+              <Text style={styles.transferLinkText}>
+                Gestionar destinatarios
+              </Text>
+              <View style={styles.transferArrowCircle}>
+                <Text style={styles.transferArrowText}>›</Text>
+              </View>
+            </Pressable>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+  // Vista: Destinar Fondos (Se activa al pulsar "＋ Ahorrar")
+  if (showAhorrar) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.detailHeader}>
+          <Pressable
+            onPress={() => setShowAhorrar(false)}
+            style={styles.backButton}
+            android_ripple={{ color: "#00000010" }}
+          >
+            <Text style={styles.backArrow}>←</Text>
+          </Pressable>
+          <Text style={styles.detailHeaderTitle}>Destinar Fondos</Text>
+          <View
+            style={[
+              styles.avatar,
+              { width: 32, height: 32, borderRadius: 16, marginLeft: "auto" },
+            ]}
+          />
+        </View>
+
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={[styles.container, styles.containerAhorrar]}
+        >
+          <View style={styles.bubbleCardAhorrar}>
+            <Text style={styles.mascotPlaceholderAhorrar}>🤖</Text>
+            <Text style={styles.bubbleTextAhorrar}>
+              "¡Casi lo logras! Destinar un poco más hoy te acercará 3 días
+              antes a tu meta."
+            </Text>
+          </View>
+
+          <View style={styles.goalCardActive}>
+            <View style={styles.goalHeaderActive}>
+              <View>
+                <Text style={styles.goalLabelActive}>META ACTIVA</Text>
+                <Text style={styles.goalTitleActive}>Play Station 5</Text>
+              </View>
+              <Text style={styles.gameIconActive}>🎮</Text>
+            </View>
+            <View style={styles.balanceRowActive}>
+              <Text style={styles.balanceAmountActive}>3.750</Text>
+              <Text style={styles.currencyActive}>Bs</Text>
+              <Text style={styles.percentageActive}>75%</Text>
+            </View>
+            <View style={styles.progressBarBackgroundActive}>
+              <View style={styles.progressBarFillActive} />
+            </View>
+            <Text style={styles.remainingTextActive}>
+              Faltan 1.250 Bs para completar el objetivo.
+            </Text>
+          </View>
+
+          <Text style={styles.inputLabelAhorrar}>
+            ¿CUÁNTO QUIERES AHORRAR HOY?
+          </Text>
+          <View style={styles.inputBoxAhorrar}>
+            <Text style={styles.inputCurrencyAhorrar}>Bs</Text>
+            <TextInput
+              style={styles.inputAhorrar}
+              value={amount}
+              onChangeText={setAmount}
+              keyboardType="numeric"
+            />
+          </View>
+
+          <View style={styles.chipsRowAhorrar}>
+            <Pressable
+              style={[
+                styles.chipAhorrar,
+                amount === "50" && styles.chipActiveAhorrar,
+              ]}
+              onPress={() => setAmount("50")}
+            >
+              <Text
+                style={[
+                  styles.chipTextAhorrar,
+                  amount === "50" && styles.chipTextActiveAhorrar,
+                ]}
+              >
+                50 Bs
+              </Text>
+            </Pressable>
+            <Pressable
+              style={[
+                styles.chipAhorrar,
+                amount === "100" && styles.chipActiveAhorrar,
+              ]}
+              onPress={() => setAmount("100")}
+            >
+              <Text
+                style={[
+                  styles.chipTextAhorrar,
+                  amount === "100" && styles.chipTextActiveAhorrar,
+                ]}
+              >
+                100 Bs
+              </Text>
+            </Pressable>
+            <Pressable
+              style={[
+                styles.chipAhorrar,
+                amount === "200" && styles.chipActiveAhorrar,
+              ]}
+              onPress={() => setAmount("200")}
+            >
+              <Text
+                style={[
+                  styles.chipTextAhorrar,
+                  amount === "200" && styles.chipTextActiveAhorrar,
+                ]}
+              >
+                200 Bs
+              </Text>
+            </Pressable>
+          </View>
+
+          <Pressable style={styles.walletRowAhorrar}>
+            <View style={styles.walletIconCircleAhorrar}>
+              <Text>💼</Text>
+            </View>
+            <View>
+              <Text style={styles.walletLabelAhorrar}>DEBITAR DESDE</Text>
+              <Text style={styles.walletTitleAhorrar}>
+                Mi Billetera Principal
+              </Text>
+            </View>
+            <Text style={styles.walletArrowAhorrar}>›</Text>
+          </Pressable>
+
+          <Pressable
+            style={styles.mainSaveButtonAhorrar}
+            android_ripple={{ color: "#00000010" }}
+          >
+            <Text style={styles.mainSaveButtonTextAhorrar}>＋ Ahorrar</Text>
+          </Pressable>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+  // Vista: Detalles de Ingresos
   if (showDetails) {
     return (
       <SafeAreaView style={styles.safeArea}>
@@ -49,6 +296,7 @@ export default function HomeScreen() {
     );
   }
 
+  // Vista: Home Principal
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView
@@ -75,10 +323,16 @@ export default function HomeScreen() {
             <Text style={styles.currency}>Bs</Text>
           </View>
           <View style={styles.actionsRow}>
-            <Pressable style={styles.primaryButton}>
+            <Pressable
+              style={styles.primaryButton}
+              onPress={() => setShowAhorrar(true)}
+            >
               <Text style={styles.primaryButtonText}>＋ Ahorrar</Text>
             </Pressable>
-            <Pressable style={styles.secondaryButton}>
+            <Pressable
+              style={styles.secondaryButton}
+              onPress={() => setShowTransferir(true)}
+            >
               <Text style={styles.secondaryButtonText}>💵 Transferir</Text>
             </Pressable>
           </View>
@@ -169,6 +423,10 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     paddingBottom: 40,
+  },
+
+  containerAhorrar: {
+    paddingBottom: 110,
   },
 
   header: {
@@ -483,5 +741,367 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "800",
     color: "#0A2A1A",
+  },
+
+  bubbleCardAhorrar: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 24,
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    borderWidth: 1,
+    borderColor: "#EAECE6",
+    marginBottom: 20,
+  },
+
+  mascotPlaceholderAhorrar: {
+    fontSize: 28,
+  },
+
+  bubbleTextAhorrar: {
+    flex: 1,
+    color: "#7B7B7B",
+    fontSize: 14,
+    fontStyle: "italic",
+    lineHeight: 18,
+  },
+
+  goalCardActive: {
+    backgroundColor: "#0B3B22",
+    borderRadius: 32,
+    padding: 24,
+    marginBottom: 24,
+  },
+
+  goalHeaderActive: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+
+  goalLabelActive: {
+    color: "#B8D8BF",
+    fontSize: 11,
+    fontWeight: "700",
+  },
+
+  goalTitleActive: {
+    color: "white",
+    fontSize: 28,
+    fontWeight: "800",
+    marginTop: 4,
+  },
+
+  gameIconActive: {
+    fontSize: 26,
+  },
+
+  balanceRowActive: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+    marginTop: 14,
+    marginBottom: 12,
+  },
+
+  balanceAmountActive: {
+    color: "white",
+    fontSize: 44,
+    fontWeight: "900",
+  },
+
+  currencyActive: {
+    color: "white",
+    fontSize: 24,
+    marginLeft: 6,
+    marginBottom: 4,
+    fontWeight: "700",
+  },
+
+  percentageActive: {
+    color: "#B8D8BF",
+    fontSize: 14,
+    marginLeft: "auto",
+    marginBottom: 6,
+    fontWeight: "600",
+  },
+
+  progressBarBackgroundActive: {
+    height: 12,
+    borderRadius: 999,
+    backgroundColor: "#44614D",
+    overflow: "hidden",
+    marginBottom: 14,
+  },
+
+  progressBarFillActive: {
+    width: "75%",
+    height: "100%",
+    backgroundColor: "#9AFF45",
+    borderRadius: 999,
+  },
+
+  remainingTextActive: {
+    color: "#B8D8BF",
+    fontSize: 13,
+    fontWeight: "500",
+  },
+
+  inputLabelAhorrar: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#4A6D3B",
+    textAlign: "center",
+    marginBottom: 12,
+    letterSpacing: 0.5,
+  },
+
+  inputBoxAhorrar: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: "#EAECE6",
+    paddingVertical: 20,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+
+  inputCurrencyAhorrar: {
+    fontSize: 32,
+    fontWeight: "800",
+    color: "#0A2A1A",
+    marginRight: 8,
+  },
+
+  inputAhorrar: {
+    fontSize: 32,
+    fontWeight: "800",
+    color: "#0A2A1A",
+    minWidth: 80,
+  },
+
+  chipsRowAhorrar: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 10,
+    marginBottom: 24,
+  },
+
+  chipAhorrar: {
+    backgroundColor: "#EAECE6",
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 999,
+  },
+
+  chipActiveAhorrar: {
+    backgroundColor: "#9AFF45",
+    borderWidth: 1,
+    borderColor: "#0A2A1A",
+  },
+
+  chipTextAhorrar: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#7B7B7B",
+  },
+
+  chipTextActiveAhorrar: {
+    color: "#0A2A1A",
+  },
+
+  walletRowAhorrar: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 24,
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#EAECE6",
+    marginBottom: 28,
+  },
+
+  walletIconCircleAhorrar: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    backgroundColor: "#F5F6F2",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+  },
+
+  walletLabelAhorrar: {
+    fontSize: 10,
+    fontWeight: "700",
+    color: "#8A8A8A",
+  },
+
+  walletTitleAhorrar: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#0A2A1A",
+    marginTop: 2,
+  },
+
+  walletArrowAhorrar: {
+    fontSize: 22,
+    color: "#7B7B7B",
+    marginLeft: "auto",
+  },
+
+  mainSaveButtonAhorrar: {
+    backgroundColor: "#9AFF45",
+    borderRadius: 24,
+    paddingVertical: 18,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  mainSaveButtonTextAhorrar: {
+    color: "#0A2A1A",
+    fontSize: 18,
+    fontWeight: "800",
+  },
+
+  /* NUEVOS ESTILOS - PANTALLA TRANSFERENCIAS */
+  transferHeaderContainer: {
+    backgroundColor: "#0B3B22",
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
+    paddingHorizontal: 20,
+    paddingTop: 16,
+    paddingBottom: 30,
+  },
+
+  transferHeaderTopRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+
+  transferBackButton: {
+    width: 44,
+    height: 44,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 22,
+  },
+
+  transferBackArrow: {
+    fontSize: 28,
+    color: "white",
+    fontWeight: "700",
+  },
+
+  transferMenuIcon: {
+    width: 24,
+    height: 18,
+    justifyContent: "space-between",
+  },
+
+  menuLine: {
+    height: 3,
+    backgroundColor: "white",
+    borderRadius: 2,
+    width: "100%",
+  },
+
+  transferHeaderTitle: {
+    fontSize: 28,
+    fontWeight: "800",
+    color: "white",
+    marginLeft: 4,
+  },
+
+  transferMainCard: {
+    backgroundColor: "#DDF4C8",
+    borderRadius: 24,
+    padding: 22,
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16,
+    gap: 16,
+    marginTop: 10,
+  },
+
+  transferSecondaryCard: {
+    backgroundColor: "#EAECE6",
+    borderRadius: 24,
+    padding: 22,
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 24,
+    gap: 16,
+  },
+
+  transferIconCircleGreen: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: "#32563F",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  transferIconCircleGray: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: "#32563F",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  transferIconText: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "700",
+  },
+
+  transferCardText: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#0A2A1A",
+    flex: 1,
+  },
+
+  transferLinkList: {
+    marginTop: 8,
+  },
+
+  transferLinkItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#E2E4DE",
+  },
+
+  transferLinkText: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#0A2A1A",
+  },
+
+  transferArrowCircle: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#0A2A1A",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  transferArrowText: {
+    fontSize: 20,
+    color: "#0A2A1A",
+    fontWeight: "600",
+    marginTop: -2,
   },
 });
