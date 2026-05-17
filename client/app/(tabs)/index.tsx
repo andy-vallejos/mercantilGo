@@ -342,7 +342,7 @@ export default function HomeScreen() {
               <Text>🎁</Text>
             </View>
             <View style={{ flex: 1 }}>
-              <Text style={styles.transactionTitle}>Bono AhorroGo</Text>
+              <Text style={styles.transactionTitle}>Bono MercantilanGO</Text>
               <Text style={styles.transactionDate}>10 Feb, 2026</Text>
             </View>
             <Text style={styles.transactionAmount}>+200 Bs</Text>
@@ -358,16 +358,14 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.container}
       >
-        {/* HEADER */}
         <View style={styles.header}>
           <View style={styles.logoContainer}>
             <View style={styles.avatar} />
             <Text style={styles.logoText}>MercantilGo</Text>
           </View>
 
-          {/* 🔔 + LINK PERFIL */}
           <View style={{ flexDirection: "row", alignItems: "center", gap: 14 }}>
-            <Text style={styles.notification}>🔔</Text>
+            <Text style={styles.notification}>👤</Text>
 
             <Link href="/user-info" asChild>
               <Pressable android_ripple={{ color: "#00000010" }}>
@@ -377,13 +375,11 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* WELCOME */}
         <View style={styles.welcomeContainer}>
           <Text style={styles.welcomeText}>Hola, Carlos 👋</Text>
           <Text style={styles.title}>Tu resumen diario</Text>
         </View>
 
-        {/* BALANCE */}
         <View style={styles.balanceCard}>
           <Text style={styles.balanceLabel}>SALDO DISPONIBLE</Text>
           <View style={styles.balanceRow}>
@@ -410,7 +406,6 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* SALDO BLOQUEADO */}
         <View style={styles.blockedCard}>
           <View style={styles.lockCircle}>
             <Text>🔒</Text>
@@ -448,13 +443,12 @@ export default function HomeScreen() {
             <Text>🎁</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.transactionTitle}>Bono AhorroGo</Text>
+            <Text style={styles.transactionTitle}>Bono MercantilanGO</Text>
             <Text style={styles.transactionDate}>10 Feb, 2026</Text>
           </View>
           <Text style={styles.transactionAmount}>+200 Bs</Text>
         </View>
 
-        {/* MENSAJE */}
         <View style={styles.messageCard}>
           <Text style={styles.messageText}>
             ¡Vas por buen camino, Carlos! Tu meta del PS5 está cada vez más
@@ -478,6 +472,7 @@ const styles = StyleSheet.create({
   containerAhorrar: {
     paddingBottom: 110,
   },
+  profileLink: {},
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
