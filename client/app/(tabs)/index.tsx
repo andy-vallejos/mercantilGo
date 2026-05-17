@@ -1,133 +1,160 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-
+import React, { useState } from "react";
+import { Link } from "expo-router";
+import { ScrollView, StyleSheet, Text, View, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
+  const [showDetails, setShowDetails] = useState(false);
+
+  if (showDetails) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.detailHeader}>
+          <Pressable
+            onPress={() => setShowDetails(false)}
+            style={styles.backButton}
+            android_ripple={{ color: "#00000010" }}
+          >
+            <Text style={styles.backArrow}>←</Text>
+          </Pressable>
+          <Text style={styles.detailHeaderTitle}>Detalles de Ingresos</Text>
+        </View>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.container}
+        >
+          <View style={styles.transactionCard}>
+            <View style={styles.transactionIcon}>
+              <Text>💵</Text>
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.transactionTitle}>Depósito Mensual</Text>
+              <Text style={styles.transactionDate}>12 Feb, 2026</Text>
+            </View>
+            <Text style={styles.transactionAmount}>+1.000 Bs</Text>
+          </View>
+
+          <View style={styles.transactionCard}>
+            <View style={styles.transactionIcon}>
+              <Text>🎁</Text>
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.transactionTitle}>Bono AhorroGo</Text>
+              <Text style={styles.transactionDate}>10 Feb, 2026</Text>
+            </View>
+            <Text style={styles.transactionAmount}>+200 Bs</Text>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.container}
       >
-        {/* HEADER */}
         <View style={styles.header}>
           <View style={styles.logoContainer}>
             <View style={styles.avatar} />
             <Text style={styles.logoText}>MercantilGo</Text>
           </View>
-
           <Text style={styles.notification}>🔔</Text>
         </View>
 
-        {/* WELCOME */}
         <View style={styles.welcomeContainer}>
           <Text style={styles.welcomeText}>Hola, Carlos 👋</Text>
           <Text style={styles.title}>Tu resumen diario</Text>
         </View>
 
-        {/* BALANCE CARD */}
         <View style={styles.balanceCard}>
           <Text style={styles.balanceLabel}>SALDO DISPONIBLE</Text>
-
           <View style={styles.balanceRow}>
             <Text style={styles.balanceAmount}>5.420,00</Text>
             <Text style={styles.currency}>Bs</Text>
           </View>
-
           <View style={styles.actionsRow}>
             <Pressable style={styles.primaryButton}>
               <Text style={styles.primaryButtonText}>＋ Ahorrar</Text>
             </Pressable>
-
             <Pressable style={styles.secondaryButton}>
               <Text style={styles.secondaryButtonText}>💵 Transferir</Text>
             </Pressable>
           </View>
         </View>
 
-        {/* BLOCKED BALANCE */}
         <View style={styles.blockedCard}>
           <View style={styles.lockCircle}>
             <Text>🔒</Text>
           </View>
-
           <View style={{ flex: 1 }}>
             <Text style={styles.blockedLabel}>SALDO BLOQUEADO</Text>
             <Text style={styles.blockedAmount}>2.000,00 Bs</Text>
           </View>
-
           <View style={styles.infoCircle}>
             <Text>i</Text>
           </View>
         </View>
 
-        {/* GOAL CARD */}
         <View style={styles.goalCard}>
           <View style={styles.goalHeader}>
             <View>
               <Text style={styles.goalLabel}>META ACTUAL</Text>
               <Text style={styles.goalTitle}>PlayStation 5</Text>
             </View>
-
             <View>
               <Text style={styles.goalLabel}>PROGRESO</Text>
               <Text style={styles.goalProgress}>75%</Text>
             </View>
           </View>
-
           <View style={styles.progressBarBackground}>
             <View style={styles.progressBarFill} />
           </View>
-
           <View style={styles.progressValues}>
             <Text style={styles.progressMin}>0 Bs</Text>
             <Text style={styles.progressMax}>2.000 Bs</Text>
           </View>
         </View>
 
-        {/* INCOMES */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Ingresos Recientes</Text>
-          <Text style={styles.seeAll}>Ver todos</Text>
+          <Pressable
+            onPress={() => setShowDetails(true)}
+            android_ripple={{ color: "#00000010" }}
+          >
+            <Text style={styles.seeAll}>Ver todos</Text>
+          </Pressable>
         </View>
 
-        {/* ITEM */}
         <View style={styles.transactionCard}>
           <View style={styles.transactionIcon}>
             <Text>💵</Text>
           </View>
-
           <View style={{ flex: 1 }}>
             <Text style={styles.transactionTitle}>Depósito Mensual</Text>
             <Text style={styles.transactionDate}>12 Feb, 2026</Text>
           </View>
-
           <Text style={styles.transactionAmount}>+1.000 Bs</Text>
         </View>
 
-        {/* ITEM */}
         <View style={styles.transactionCard}>
           <View style={styles.transactionIcon}>
             <Text>🎁</Text>
           </View>
-
           <View style={{ flex: 1 }}>
             <Text style={styles.transactionTitle}>Bono AhorroGo</Text>
             <Text style={styles.transactionDate}>10 Feb, 2026</Text>
           </View>
-
           <Text style={styles.transactionAmount}>+200 Bs</Text>
         </View>
 
-        {/* MOTIVATION */}
         <View style={styles.messageCard}>
           <Text style={styles.messageText}>
             ¡Vas por buen camino, Carlos! Tu meta del PS5 está cada vez más
             cerca.
           </Text>
         </View>
-
-        {/* BOTTOM NAV */}
       </ScrollView>
     </SafeAreaView>
   );
@@ -427,5 +454,34 @@ const styles = StyleSheet.create({
     color: "#777",
     fontStyle: "italic",
     lineHeight: 22,
+  },
+
+  detailHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    backgroundColor: "#F5F6F2",
+  },
+
+  backButton: {
+    width: 44,
+    height: 44,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 22,
+    marginRight: 8,
+  },
+
+  backArrow: {
+    fontSize: 28,
+    color: "#0A2A1A",
+    fontWeight: "700",
+  },
+
+  detailHeaderTitle: {
+    fontSize: 24,
+    fontWeight: "800",
+    color: "#0A2A1A",
   },
 });
