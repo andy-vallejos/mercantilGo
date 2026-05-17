@@ -22,9 +22,9 @@ export default function StatsScreen() {
       <View style={styles.header}>
         <View style={styles.logoRow}>
           <View style={styles.avatarMock} />
-          <Text style={styles.logoText}>AhorroGo</Text>
+          <Text style={styles.logoText}>MercantilanGO</Text>
         </View>
-        <Text style={styles.notificationIcon}>🔔</Text>
+        <Text style={styles.notificationIcon}>👤</Text>
       </View>
 
       <ScrollView

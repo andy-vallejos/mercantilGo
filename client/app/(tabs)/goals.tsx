@@ -1,5 +1,13 @@
-import React from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Modal,
+  TextInput,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const CONFIG = {
@@ -16,14 +24,28 @@ const CONFIG = {
 };
 
 export default function GoalsScreen() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [goalName, setGoalName] = useState("");
+  const [goalAmount, setGoalAmount] = useState("");
+  const [goalDeadline, setGoalDeadline] = useState("");
+
+  const handleSaveGoal = () => {
+    console.log({ goalName, goalAmount, goalDeadline });
+
+    setGoalName("");
+    setGoalAmount("");
+    setGoalDeadline("");
+    setIsModalVisible(false);
+  };
+
   return (
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
       <View style={styles.header}>
         <View style={styles.logoRow}>
           <Text style={styles.logoIcon}>📱</Text>
-          <Text style={styles.logoText}>AhorroGo</Text>
+          <Text style={styles.logoText}>MercantilanGO</Text>
         </View>
-        <Text style={styles.notificationIcon}>🔔</Text>
+        <Text style={styles.notificationIcon}>👤</Text>
       </View>
 
       <ScrollView
@@ -113,6 +135,7 @@ export default function GoalsScreen() {
               { backgroundColor: CONFIG.colors.primary },
             ]}
             android_ripple={{ color: "#ffffff10" }}
+            onPress={() => setIsModalVisible(true)}
           >
             <Text
               style={[styles.gridIcon, { color: CONFIG.colors.primaryLight }]}
@@ -143,6 +166,61 @@ export default function GoalsScreen() {
           </View>
         </View>
       </ScrollView>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={() => setIsModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Nueva Meta 🎯</Text>
+              <Pressable
+                style={styles.closeButton}
+                onPress={() => setIsModalVisible(false)}
+              >
+                <Text style={styles.closeButtonText}>✕</Text>
+              </Pressable>
+            </View>
+
+            <Text style={styles.inputLabel}>¿Qué estás planeando ahorrar?</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Ej. Laptop Nueva, Tenis..."
+              placeholderTextColor="#A3A3A3"
+              value={goalName}
+              onChangeText={setGoalName}
+            />
+
+            <Text style={styles.inputLabel}>Monto total objetivo (Bs)</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Ej. 3500"
+              placeholderTextColor="#A3A3A3"
+              keyboardType="numeric"
+              value={goalAmount}
+              onChangeText={setGoalAmount}
+            />
+
+            <Text style={styles.inputLabel}>
+              ¿Hasta cuándo vas a cumplirlo?
+            </Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Ej. Diciembre 2026, 3 meses..."
+              placeholderTextColor="#A3A3A3"
+              value={goalDeadline}
+              onChangeText={setGoalDeadline}
+            />
+
+            <Pressable style={styles.saveButton} onPress={handleSaveGoal}>
+              <Text style={styles.saveButtonText}>Crear Meta</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -405,5 +483,72 @@ const styles = StyleSheet.create({
     borderRightColor: "transparent",
     borderBottomWidth: 8,
     borderBottomColor: CONFIG.colors.border,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "flex-end",
+  },
+  modalContent: {
+    backgroundColor: CONFIG.colors.white,
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
+    paddingHorizontal: 24,
+    paddingTop: 24,
+    paddingBottom: 40,
+  },
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: "800",
+    color: CONFIG.colors.text,
+  },
+  closeButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: CONFIG.colors.border,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  closeButtonText: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: CONFIG.colors.textLight,
+  },
+  inputLabel: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: CONFIG.colors.text,
+    marginBottom: 8,
+    marginTop: 12,
+  },
+  input: {
+    backgroundColor: CONFIG.colors.background,
+    borderWidth: 1,
+    borderColor: CONFIG.colors.border,
+    borderRadius: 16,
+    paddingHorizontal: 16,
+    height: 52,
+    fontSize: 15,
+    color: CONFIG.colors.text,
+  },
+  saveButton: {
+    backgroundColor: CONFIG.colors.primary,
+    borderRadius: 16,
+    height: 54,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 28,
+  },
+  saveButtonText: {
+    color: CONFIG.colors.white,
+    fontSize: 16,
+    fontWeight: "700",
   },
 });

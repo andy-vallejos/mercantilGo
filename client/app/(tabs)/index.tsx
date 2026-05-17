@@ -342,7 +342,7 @@ export default function HomeScreen() {
               <Text>🎁</Text>
             </View>
             <View style={{ flex: 1 }}>
-              <Text style={styles.transactionTitle}>Bono AhorroGo</Text>
+              <Text style={styles.transactionTitle}>Bono MercantilanGO</Text>
               <Text style={styles.transactionDate}>10 Feb, 2026</Text>
             </View>
             <Text style={styles.transactionAmount}>+200 Bs</Text>
@@ -365,7 +365,7 @@ export default function HomeScreen() {
           </View>
 
           <View style={{ flexDirection: "row", alignItems: "center", gap: 14 }}>
-            <Text style={styles.notification}>🔔</Text>
+            <Text style={styles.notification}>👤</Text>
 
             <Link href="/user-info" asChild>
               <Pressable android_ripple={{ color: "#00000010" }}>
@@ -443,7 +443,7 @@ export default function HomeScreen() {
             <Text>🎁</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.transactionTitle}>Bono AhorroGo</Text>
+            <Text style={styles.transactionTitle}>Bono MercantilanGO</Text>
             <Text style={styles.transactionDate}>10 Feb, 2026</Text>
           </View>
           <Text style={styles.transactionAmount}>+200 Bs</Text>
@@ -472,6 +472,7 @@ const styles = StyleSheet.create({
   containerAhorrar: {
     paddingBottom: 110,
   },
+  profileLink: {},
   header: {
     flexDirection: "row",
     justifyContent: "space-between",

@@ -11,9 +11,19 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ChallengesScreen() {
+  const [currentScreen, setCurrentScreen] = useState("challenges");
   const [createModalVisible, setCreateModalVisible] = useState(false);
   const [successModalVisible, setSuccessModalVisible] = useState(false);
+  const [allChallengesVisible, setAllChallengesVisible] = useState(false);
+  const [detailsModalVisible, setDetailsModalVisible] = useState(false);
   const [selectedType, setSelectedType] = useState("ahorro");
+  const [selectedCategory, setSelectedCategory] = useState("Populares");
+
+  const currentChallenger = {
+    name: "Juanito",
+    points: 500,
+    type: "Duelo de Ahorro 🐷",
+  };
 
   const handleLaunchChallenge = () => {
     setCreateModalVisible(false);
@@ -21,6 +31,180 @@ export default function ChallengesScreen() {
       setSuccessModalVisible(true);
     }, 400);
   };
+
+  if (currentScreen === "benefits") {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.benefitsHeaderNav}>
+          <Pressable
+            style={styles.backButtonCircle}
+            onPress={() => setCurrentScreen("challenges")}
+          >
+            <Text style={styles.backButtonText}>←</Text>
+          </Pressable>
+          <Text style={styles.benefitsHeaderTitle}>Recompensas - AhorroGo</Text>
+          <View style={{ width: 36 }} />
+        </View>
+
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.benefitsContainer}
+        >
+          <View style={styles.userHeaderRow}>
+            <View style={styles.userProfileBox}>
+              <View style={styles.userAvatarFallback}>
+                <Text style={styles.userAvatarIcon}>👤</Text>
+              </View>
+              <Text style={styles.userProfileName}>MercantilGo</Text>
+            </View>
+            <Pressable style={styles.notificationButton}>
+              <Text style={styles.notificationIcon}>🔔</Text>
+            </Pressable>
+          </View>
+
+          <View style={styles.pointsDashboardCard}>
+            <View style={styles.pointsLeftContent}>
+              <Text style={styles.pointsCardLabel}>Mis Ahorros</Text>
+              <Text style={styles.pointsCardValue}>1,240</Text>
+              <Text style={styles.pointsCardSubtext}>Puntos Acumulados</Text>
+            </View>
+            <View style={styles.levelBadgeContainer}>
+              <Text style={styles.levelBadgeIcon}>★</Text>
+              <Text style={styles.levelBadgeText}>Nivel Oro</Text>
+            </View>
+          </View>
+
+          <View>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.categoriesScroll}
+            >
+              {["Populares", "Finanzas", "Estilo de Vida", "Tecnología"].map(
+                (cat) => (
+                  <Pressable
+                    key={cat}
+                    style={[
+                      styles.categoryChip,
+                      selectedCategory === cat && styles.categoryChipActive,
+                    ]}
+                    onPress={() => setSelectedCategory(cat)}
+                  >
+                    <Text
+                      style={[
+                        styles.categoryChipText,
+                        selectedCategory === cat &&
+                          styles.categoryChipTextActive,
+                      ]}
+                    >
+                      {cat}
+                    </Text>
+                  </Pressable>
+                ),
+              )}
+            </ScrollView>
+          </View>
+
+          <View style={styles.featuredRewardCard}>
+            <View style={styles.featuredRewardLeft}>
+              <View style={styles.featuredIconBox}>
+                <Text style={styles.featuredIcon}>🚀</Text>
+              </View>
+              <View style={styles.featuredInfo}>
+                <View style={styles.limitedBadge}>
+                  <Text style={styles.limitedBadgeText}>LIMITADO</Text>
+                </View>
+                <Text style={styles.featuredTitle}>Doble de interés</Text>
+                <Text style={styles.featuredSubtitle}>
+                  Próximo mes en Meta 1
+                </Text>
+                <Text style={styles.featuredCost}>2,500 pts</Text>
+              </View>
+            </View>
+            <Pressable style={styles.claimButtonDark}>
+              <Text style={styles.claimButtonDarkText}>Canjear</Text>
+            </Pressable>
+          </View>
+
+          <View style={styles.exploreHeaderRow}>
+            <Text style={styles.exploreTitle}>Explorar Recompensas</Text>
+            <Pressable style={styles.filterButton}>
+              <Text style={styles.filterIcon}>🎛️</Text>
+            </Pressable>
+          </View>
+
+          <View style={styles.rewardListItem}>
+            <View style={styles.rewardListIconBox}>
+              <Text style={styles.rewardListEmoji}>🛒</Text>
+            </View>
+            <View style={styles.rewardListInfo}>
+              <Text style={styles.rewardListTitle}>Cupón de Descuento</Text>
+              <Text style={styles.rewardListSubtitle}>
+                15% en Supermercados
+              </Text>
+              <Text style={styles.rewardListCost}>800 pts</Text>
+            </View>
+            <Pressable style={styles.claimButtonLight}>
+              <Text style={styles.claimButtonLightText}>Canjear</Text>
+            </Pressable>
+          </View>
+
+          <View style={styles.rewardListItem}>
+            <View style={styles.rewardListIconBox}>
+              <Text style={styles.rewardListEmoji}>🎬</Text>
+            </View>
+            <View style={styles.rewardListInfo}>
+              <Text style={styles.rewardListTitle}>Cine Center 2x1</Text>
+              <Text style={styles.rewardListSubtitle}>50% de descuento</Text>
+              <Text style={styles.rewardListCost}>1,200 pts</Text>
+            </View>
+            <Pressable style={styles.claimButtonLight}>
+              <Text style={styles.claimButtonLightText}>Canjear</Text>
+            </Pressable>
+          </View>
+
+          <View style={styles.rewardListItem}>
+            <View style={styles.rewardListIconBox}>
+              <Text style={styles.rewardListEmoji}>📱</Text>
+            </View>
+            <View style={styles.rewardListInfo}>
+              <Text style={styles.rewardListTitle}>Datos Móviles</Text>
+              <Text style={styles.rewardListSubtitle}>200 MB</Text>
+              <Text style={styles.rewardListCost}>500 pts</Text>
+            </View>
+            <Pressable style={styles.claimButtonLight}>
+              <Text style={styles.claimButtonLightText}>Canjear</Text>
+            </Pressable>
+          </View>
+
+          <View style={styles.rewardListItem}>
+            <View style={styles.rewardListIconBox}>
+              <Text style={styles.rewardListEmoji}>🎵</Text>
+            </View>
+            <View style={styles.rewardListInfo}>
+              <Text style={styles.rewardListTitle}>Spotify</Text>
+              <Text style={styles.rewardListSubtitle}>20% de descuento</Text>
+              <Text style={styles.rewardListCost}>2,000 pts</Text>
+            </View>
+            <Pressable style={styles.claimButtonLight}>
+              <Text style={styles.claimButtonLightText}>Canjear</Text>
+            </Pressable>
+          </View>
+
+          <View style={styles.mascotSpeechSection}>
+            <View style={styles.mascotSpeechBubble}>
+              <Text style={styles.mascotSpeechText}>
+                ¡Sigue ahorrando para canjear más premios!
+              </Text>
+            </View>
+            <View style={styles.mascotCircularContainer}>
+              <Text style={styles.mascotFloatingEmoji}>🤖</Text>
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -35,9 +219,13 @@ export default function ChallengesScreen() {
             </View>
             <Text style={styles.headerTitle}>Desafíos</Text>
           </View>
-          <View style={styles.fireCircle}>
-            <Text style={styles.fireIcon}>🔥</Text>
-          </View>
+          <Pressable
+            style={styles.benefitsButton}
+            onPress={() => setCurrentScreen("benefits")}
+            android_ripple={{ color: "#406B1720" }}
+          >
+            <Text style={styles.benefitsButtonText}>Beneficios 🌟</Text>
+          </Pressable>
         </View>
 
         <View style={styles.progressSection}>
@@ -59,9 +247,12 @@ export default function ChallengesScreen() {
 
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Desafíos Pendientes</Text>
-          <View style={styles.newBadge}>
+          <Pressable
+            style={styles.newBadge}
+            onPress={() => setAllChallengesVisible(true)}
+          >
             <Text style={styles.newBadgeText}>Ver todos</Text>
-          </View>
+          </Pressable>
         </View>
 
         <View style={styles.pendingCard}>
@@ -69,11 +260,16 @@ export default function ChallengesScreen() {
             <Text style={styles.gameIcon}>🎮</Text>
           </View>
           <View style={styles.pendingInfo}>
-            <Text style={styles.pendingTitle}>Juanito te está desafiando</Text>
-            <Text style={styles.pendingSubtitle}>Premio: 500 puntos</Text>
+            <Text style={styles.pendingTitle}>
+              {currentChallenger.name} te está desafiando
+            </Text>
+            <Text style={styles.pendingSubtitle}>
+              Premio: {currentChallenger.points} puntos
+            </Text>
           </View>
           <Pressable
             style={styles.detailsButton}
+            onPress={() => setDetailsModalVisible(true)}
             android_ripple={{ color: "#ffffff20" }}
           >
             <Text style={styles.detailsButtonText}>Ver detalles</Text>
@@ -113,7 +309,6 @@ export default function ChallengesScreen() {
         </View>
       </ScrollView>
 
-      {/* ==================== MODAL 1: CREAR DESAFÍO (SCROLLABLE) ==================== */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -229,7 +424,6 @@ export default function ChallengesScreen() {
         </View>
       </Modal>
 
-      {/* ==================== MODAL 2: NOTIFICACIÓN / RECONOCIMIENTO ==================== */}
       <Modal
         animationType="fade"
         transparent={true}
@@ -252,6 +446,179 @@ export default function ChallengesScreen() {
             >
               <Text style={styles.successCloseButtonText}>Entendido</Text>
             </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={allChallengesVisible}
+        onRequestClose={() => setAllChallengesVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalIndicatorRow}>
+              <View style={styles.modalIndicator} />
+            </View>
+
+            <View style={styles.modalHeaderRow}>
+              <Text style={styles.modalMainTitle}>Todos los Desafíos</Text>
+              <Pressable
+                style={styles.closeButtonCircle}
+                onPress={() => setAllChallengesVisible(false)}
+              >
+                <Text style={styles.closeButtonText}>✕</Text>
+              </Pressable>
+            </View>
+            <Text style={styles.modalSubtitle}>
+              Tienes retos acumulados esperando tu acción.
+            </Text>
+
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.modalScrollContent}
+            >
+              <View style={styles.listChallengeRow}>
+                <View
+                  style={[
+                    styles.gameIconContainer,
+                    { backgroundColor: "#9BFF42" },
+                  ]}
+                >
+                  <Text style={styles.gameIcon}>🎮</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.pendingTitle}>Juanito te desafió</Text>
+                  <Text style={styles.pendingSubtitle}>
+                    Premio: 500 pts • Duelo Ahorro
+                  </Text>
+                </View>
+                <Pressable
+                  style={styles.listActionButton}
+                  onPress={() => {
+                    setAllChallengesVisible(false);
+                    setDetailsModalVisible(true);
+                  }}
+                >
+                  <Text style={styles.listActionButtonText}>Ver</Text>
+                </Pressable>
+              </View>
+
+              <View style={styles.listChallengeRow}>
+                <View
+                  style={[
+                    styles.gameIconContainer,
+                    { backgroundColor: "#EAECE6" },
+                  ]}
+                >
+                  <Text style={styles.gameIcon}>🔥</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.pendingTitle}>Maria22 te desafió</Text>
+                  <Text style={styles.pendingSubtitle}>
+                    Premio: 350 pts • Duelo Racha
+                  </Text>
+                </View>
+                <Pressable
+                  style={styles.listActionButton}
+                  onPress={() => {
+                    setAllChallengesVisible(false);
+                    setDetailsModalVisible(true);
+                  }}
+                >
+                  <Text style={styles.listActionButtonText}>Ver</Text>
+                </Pressable>
+              </View>
+
+              <View style={styles.listChallengeRow}>
+                <View
+                  style={[
+                    styles.gameIconContainer,
+                    { backgroundColor: "#EAECE6" },
+                  ]}
+                >
+                  <Text style={styles.gameIcon}>🏳️</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.pendingTitle}>Carlos_Invert</Text>
+                  <Text style={styles.pendingSubtitle}>
+                    Premio: 1,000 pts • Duelo Meta
+                  </Text>
+                </View>
+                <Pressable
+                  style={styles.listActionButton}
+                  onPress={() => {
+                    setAllChallengesVisible(false);
+                    setDetailsModalVisible(true);
+                  }}
+                >
+                  <Text style={styles.listActionButtonText}>Ver</Text>
+                </Pressable>
+              </View>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={detailsModalVisible}
+        onRequestClose={() => setDetailsModalVisible(false)}
+      >
+        <View style={styles.successOverlay}>
+          <View style={styles.detailsCard}>
+            <View style={styles.detailsHeaderContainer}>
+              <View style={styles.detailsAvatarCircle}>
+                <Text style={styles.detailsAvatarText}>⚔️</Text>
+              </View>
+              <Text style={styles.detailsMainTitle}>¡Nuevo Reto Recibido!</Text>
+              <Text style={styles.detailsDescription}>
+                <Text style={{ fontWeight: "800", color: "#13241C" }}>
+                  {currentChallenger.name}
+                </Text>{" "}
+                quiere medir sus hábitos financieros contigo.
+              </Text>
+            </View>
+
+            <View style={styles.detailsInfoBox}>
+              <View style={styles.detailsInfoItem}>
+                <Text style={styles.detailsInfoLabel}>Modalidad</Text>
+                <Text style={styles.detailsInfoValue}>
+                  {currentChallenger.type}
+                </Text>
+              </View>
+              <View style={[styles.detailsInfoItem, { borderBottomWidth: 0 }]}>
+                <Text style={styles.detailsInfoLabel}>Recompensa</Text>
+                <Text
+                  style={[
+                    styles.detailsInfoValue,
+                    { color: "#406B17", fontWeight: "800" },
+                  ]}
+                >
+                  💎 {currentChallenger.points} Puntos
+                </Text>
+              </View>
+            </View>
+
+            <View style={styles.detailsActionRow}>
+              <Pressable
+                style={styles.declineButton}
+                onPress={() => setDetailsModalVisible(false)}
+                android_ripple={{ color: "#FF000010" }}
+              >
+                <Text style={styles.declineButtonText}>Denegar</Text>
+              </Pressable>
+
+              <Pressable
+                style={styles.acceptButton}
+                onPress={() => setDetailsModalVisible(false)}
+                android_ripple={{ color: "#ffffff20" }}
+              >
+                <Text style={styles.acceptButtonText}>Aceptar</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
@@ -296,18 +663,23 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#13241C",
   },
-  fireCircle: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+  benefitsButton: {
     backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 99,
     borderWidth: 1,
     borderColor: "#EAECE6",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
   },
-  fireIcon: {
-    fontSize: 16,
+  benefitsButtonText: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#406B17",
   },
   progressSection: {
     alignItems: "center",
@@ -388,12 +760,12 @@ const styles = StyleSheet.create({
   },
   newBadge: {
     backgroundColor: "#9BFF42",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
   },
   newBadgeText: {
-    fontSize: 9,
+    fontSize: 11,
     fontWeight: "800",
     color: "#13241C",
   },
@@ -536,8 +908,6 @@ const styles = StyleSheet.create({
   mascotEmoji: {
     fontSize: 40,
   },
-
-  /* ==================== ESTILOS MODAL CREAR DESAFÍO ==================== */
   modalOverlay: {
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.4)",
@@ -702,8 +1072,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "800",
   },
-
-  /* ==================== ESTILOS MODAL ÉXITO (NOTIFICACIÓN) ==================== */
   successOverlay: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.5)",
@@ -768,5 +1136,446 @@ const styles = StyleSheet.create({
     color: "#13241C",
     fontSize: 14,
     fontWeight: "700",
+  },
+  listChallengeRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: "#EAECE6",
+  },
+  listActionButton: {
+    backgroundColor: "#406B17",
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderRadius: 10,
+  },
+  listActionButtonText: {
+    color: "#FFFFFF",
+    fontSize: 12,
+    fontWeight: "700",
+  },
+  detailsCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 28,
+    padding: 24,
+    width: "100%",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 6,
+  },
+  detailsHeaderContainer: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  detailsAvatarCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: "#F1F9EC",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#406B1730",
+  },
+  detailsAvatarText: {
+    fontSize: 24,
+  },
+  detailsMainTitle: {
+    fontSize: 20,
+    fontWeight: "800",
+    color: "#13241C",
+    marginBottom: 6,
+  },
+  detailsDescription: {
+    fontSize: 14,
+    color: "#72776E",
+    textAlign: "center",
+    lineHeight: 18,
+    paddingHorizontal: 10,
+  },
+  detailsInfoBox: {
+    backgroundColor: "#F8F9F6",
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 4,
+    borderWidth: 1,
+    borderColor: "#EAECE6",
+    marginBottom: 24,
+  },
+  detailsInfoItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: "#EAECE6",
+  },
+  detailsInfoLabel: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#72776E",
+  },
+  detailsInfoValue: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#13241C",
+  },
+  detailsActionRow: {
+    flexDirection: "row",
+    gap: 12,
+  },
+  declineButton: {
+    flex: 1,
+    backgroundColor: "#F4F5F1",
+    paddingVertical: 16,
+    borderRadius: 16,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#E2E5DE",
+  },
+  declineButtonText: {
+    color: "#BD2A2A",
+    fontSize: 15,
+    fontWeight: "700",
+  },
+  acceptButton: {
+    flex: 1,
+    backgroundColor: "#1D3D2A",
+    paddingVertical: 16,
+    borderRadius: 16,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  acceptButtonText: {
+    color: "#FFFFFF",
+    fontSize: 15,
+    fontWeight: "700",
+  },
+
+  benefitsHeaderNav: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#EAECE6",
+    backgroundColor: "#FFFFFF",
+  },
+  backButtonCircle: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#F1F3EE",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  backButtonText: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#13241C",
+  },
+  benefitsHeaderTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#13241C",
+  },
+  benefitsContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+    backgroundColor: "#F8F9F6",
+  },
+  userHeaderRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 16,
+    marginBottom: 16,
+  },
+  userProfileBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  userAvatarFallback: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "#E2E5DE",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  userAvatarIcon: {
+    fontSize: 14,
+  },
+  userProfileName: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#13241C",
+  },
+  notificationButton: {
+    width: 36,
+    height: 36,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  notificationIcon: {
+    fontSize: 18,
+  },
+  pointsDashboardCard: {
+    backgroundColor: "#163522",
+    borderRadius: 24,
+    padding: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  pointsLeftContent: {
+    flex: 1,
+  },
+  pointsCardLabel: {
+    fontSize: 11,
+    color: "#9BFF42",
+    fontWeight: "700",
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
+  },
+  pointsCardValue: {
+    fontSize: 32,
+    fontWeight: "800",
+    color: "#FFFFFF",
+    marginVertical: 2,
+  },
+  pointsCardSubtext: {
+    fontSize: 12,
+    color: "#EAECE6",
+    opacity: 0.8,
+  },
+  levelBadgeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#9BFF42",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 99,
+    gap: 4,
+  },
+  levelBadgeIcon: {
+    fontSize: 12,
+    color: "#163522",
+  },
+  levelBadgeText: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#163522",
+  },
+  categoriesScroll: {
+    gap: 8,
+    marginBottom: 24,
+  },
+  categoryChip: {
+    backgroundColor: "#EAECE6",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 99,
+    marginRight: 8,
+  },
+  categoryChipActive: {
+    backgroundColor: "#9BFF42",
+  },
+  categoryChipText: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#4A534E",
+  },
+  categoryChipTextActive: {
+    color: "#13241C",
+    fontWeight: "700",
+  },
+  featuredRewardCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 24,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: "#EAECE6",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 24,
+  },
+  featuredRewardLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+    gap: 12,
+  },
+  featuredIconBox: {
+    width: 64,
+    height: 64,
+    borderRadius: 16,
+    backgroundColor: "#F1F9EC",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  featuredIcon: {
+    fontSize: 28,
+  },
+  featuredInfo: {
+    flex: 1,
+  },
+  limitedBadge: {
+    backgroundColor: "#FFEBEB",
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 4,
+    alignSelf: "flex-start",
+    marginBottom: 4,
+  },
+  limitedBadgeText: {
+    fontSize: 9,
+    fontWeight: "800",
+    color: "#FF4D4D",
+  },
+  featuredTitle: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#13241C",
+  },
+  featuredSubtitle: {
+    fontSize: 12,
+    color: "#72776E",
+    marginTop: 1,
+  },
+  featuredCost: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#406B17",
+    marginTop: 4,
+  },
+  claimButtonDark: {
+    backgroundColor: "#163522",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 12,
+  },
+  claimButtonDarkText: {
+    color: "#FFFFFF",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+  exploreHeaderRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  exploreTitle: {
+    fontSize: 18,
+    fontWeight: "800",
+    color: "#13241C",
+  },
+  filterButton: {
+    width: 24,
+    height: 24,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  filterIcon: {
+    fontSize: 16,
+    color: "#72776E",
+  },
+  rewardListItem: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 20,
+    padding: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#EAECE6",
+    marginBottom: 12,
+  },
+  rewardListIconBox: {
+    width: 48,
+    height: 48,
+    borderRadius: 14,
+    backgroundColor: "#F8F9F6",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 12,
+  },
+  rewardListEmoji: {
+    fontSize: 22,
+  },
+  rewardListInfo: {
+    flex: 1,
+  },
+  rewardListTitle: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#13241C",
+  },
+  rewardListSubtitle: {
+    fontSize: 12,
+    color: "#72776E",
+    marginTop: 1,
+  },
+  rewardListCost: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: "#406B17",
+    marginTop: 3,
+  },
+  claimButtonLight: {
+    backgroundColor: "#9BFF42",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 12,
+  },
+  claimButtonLightText: {
+    color: "#13241C",
+    fontSize: 13,
+    fontWeight: "700",
+  },
+  mascotSpeechSection: {
+    alignItems: "center",
+    marginTop: 20,
+    gap: 10,
+  },
+  mascotSpeechBubble: {
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#EAECE6",
+    borderRadius: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.02,
+    shadowRadius: 4,
+    elevation: 1,
+  },
+  mascotSpeechText: {
+    fontSize: 12,
+    color: "#4A534E",
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  mascotCircularContainer: {
+    width: 54,
+    height: 54,
+    borderRadius: 27,
+    backgroundColor: "#F1F9EC",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#9BFF42",
+  },
+  mascotFloatingEmoji: {
+    fontSize: 28,
   },
 });
