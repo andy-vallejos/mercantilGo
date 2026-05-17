@@ -1,26 +1,24 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Svg, { Path } from "react-native-svg"; // Asegúrate de tener react-native-svg instalado
-
+import Svg, { Path } from "react-native-svg"; 
 const CONFIG = {
   colors: {
-    primary: "#133C24", // Verde oscuro profundo de la tarjeta "Total Ahorrado"
-    primaryLight: "#9BFF42", // Verde lima brillante de la tarjeta "Retiros" y barra activa
-    background: "#F8F9F6", // Fondo general off-white
+    primary: "#133C24", 
+    primaryLight: "#9BFF42", 
+    background: "#F8F9F6", 
     white: "#FFFFFF",
-    text: "#13241C", // Texto principal oscuro
-    textLight: "#72776E", // Texto secundario grisáceo
-    success: "#588B25", // Verde para la línea de ingresos
-    expense: "#C1272D", // Rojo/marrón para la línea de egresos
-    border: "#EAECE6", // Gris claro para bordes o fondos sutiles
+    text: "#13241C",
+    textLight: "#72776E", 
+    success: "#588B25",
+    expense: "#C1272D",
+    border: "#EAECE6", 
   },
 };
 
 export default function StatsScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
-      {/* ==================== HEADER ==================== */}
       <View style={styles.header}>
         <View style={styles.logoRow}>
           <View style={styles.avatarMock} />
@@ -33,7 +31,6 @@ export default function StatsScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContainer}
       >
-        {/* ==================== ENCABEZADO DE TEXTO ==================== */}
         <View style={styles.titleContainer}>
           <Text style={styles.mainTitle}>Estadísticas de Ahorro</Text>
           <Text style={styles.subtitle}>
@@ -41,7 +38,6 @@ export default function StatsScreen() {
           </Text>
         </View>
 
-        {/* ==================== GRÁFICO: FLUJO MENSUAL ==================== */}
         <View style={styles.chartCard}>
           <View style={styles.chartHeader}>
             <Text style={styles.chartTitle}>Flujo Mensual</Text>
@@ -67,17 +63,14 @@ export default function StatsScreen() {
             </View>
           </View>
 
-          {/* Gráfico Curvo de Líneas utilizando SVG */}
           <View style={styles.svgWrapper}>
             <Svg height="120" width="100%" viewBox="0 0 300 120">
-              {/* Línea de Ingresos (Verde) */}
               <Path
                 d="M 10 90 C 40 40, 70 100, 110 70 C 150 30, 200 40, 240 85 C 270 120, 285 20, 290 30"
                 fill="transparent"
                 stroke={CONFIG.colors.success}
                 strokeWidth="3"
               />
-              {/* Línea de Egresos (Roja) */}
               <Path
                 d="M 10 105 C 40 60, 70 115, 110 90 C 150 50, 200 65, 240 100 C 270 130, 285 45, 290 60"
                 fill="transparent"
@@ -86,8 +79,6 @@ export default function StatsScreen() {
               />
             </Svg>
           </View>
-
-          {/* Etiquetas del eje X */}
           <View style={styles.chartXAxis}>
             <Text style={styles.axisLabel}>Ene</Text>
             <Text style={styles.axisLabel}>Feb</Text>
@@ -97,9 +88,7 @@ export default function StatsScreen() {
           </View>
         </View>
 
-        {/* ==================== TARJETAS DE INDICADORES (GRID) ==================== */}
         <View style={styles.indicatorGrid}>
-          {/* Total Ahorrado */}
           <View
             style={[
               styles.indicatorCard,
@@ -122,8 +111,6 @@ export default function StatsScreen() {
             </Text>
             <Text style={styles.indicatorTrendUp}>📈 +12%</Text>
           </View>
-
-          {/* Retiros */}
           <View
             style={[
               styles.indicatorCard,
@@ -148,11 +135,7 @@ export default function StatsScreen() {
             <Text style={styles.indicatorTrendDown}>📉 -4%</Text>
           </View>
         </View>
-
-        {/* ==================== CATEGORÍAS DE AHORRO ==================== */}
         <Text style={styles.sectionTitle}>Categorías de Ahorro</Text>
-
-        {/* Categoría 1: PS5 */}
         <View style={styles.categoryRow}>
           <View style={styles.categoryIconBg}>
             <Text style={styles.categoryIcon}>🎮</Text>
@@ -173,7 +156,6 @@ export default function StatsScreen() {
           </View>
         </View>
 
-        {/* Categoría 2: Libros */}
         <View style={styles.categoryRow}>
           <View style={[styles.categoryIconBg, { backgroundColor: "#3D423A" }]}>
             <Text style={styles.categoryIcon}>📔</Text>
@@ -194,7 +176,6 @@ export default function StatsScreen() {
           </View>
         </View>
 
-        {/* ==================== TARJETA DE RECOMENDACIÓN IA INFERIOR ==================== */}
         <View style={styles.insightCard}>
           <View style={styles.insightTextContent}>
             <Text style={styles.insightTitle}>¡Vas por buen camino!</Text>
@@ -211,7 +192,7 @@ export default function StatsScreen() {
   );
 }
 
-/* ==================== HOJA DE ESTILOS ==================== */
+
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -264,7 +245,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  // Tarjeta de gráfico
   chartCard: {
     backgroundColor: CONFIG.colors.white,
     borderRadius: 24,
@@ -318,8 +298,6 @@ const styles = StyleSheet.create({
     color: CONFIG.colors.textLight,
     fontWeight: "600",
   },
-
-  // Grid de Indicadores numéricos
   indicatorGrid: {
     flexDirection: "row",
     gap: 16,
@@ -358,7 +336,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
 
-  // Categorías de ahorro listas
   sectionTitle: {
     fontSize: 18,
     fontWeight: "800",
@@ -417,7 +394,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
 
-  // Tarjeta de Recomendación Inteligente (Fondo verde claro suave)
   insightCard: {
     backgroundColor: "#F2F6EB",
     borderRadius: 24,

@@ -1,6 +1,5 @@
 import { Tabs } from "expo-router";
 import React from "react";
-
 import { Ionicons } from "@expo/vector-icons";
 
 export default function TabLayout() {
@@ -8,64 +7,57 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-
         tabBarActiveTintColor: "#2D4F3C",
-        tabBarActiveBackgroundColor: "#A3FF62",
         tabBarInactiveTintColor: "#777",
-
         tabBarShowLabel: true,
 
         tabBarStyle: {
           position: "absolute",
-
           bottom: 0,
           left: 0,
           right: 0,
-
-          height: 90,
-
+          height: 85,
           borderTopLeftRadius: 28,
           borderTopRightRadius: 28,
-
           overflow: "hidden",
-
           backgroundColor: "white",
-
           borderTopWidth: 0,
-
-          elevation: 0,
-
-          paddingTop: 10,
+          elevation: 10,
+          shadowColor: "#000",
+          shadowOpacity: 0.06,
+          shadowRadius: 10,
         },
 
         tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: "600",
-          marginBottom: 2,
+          fontSize: 11,
+          fontWeight: "700",
+          marginBottom: 4,
         },
 
-        tabBarItemStyle: {
-          borderRadius: 20,
+        tabBarItemStyle: ({ focused }) => ({
+          borderRadius: 16, 
+          backgroundColor: focused ? "#A3FF62" : "transparent", 
 
-          marginVertical: 10,
-          marginHorizontal: 6,
-
+          height: 55,
+          maxWidth: 75,
+          
+          alignSelf: "center",
           justifyContent: "center",
           alignItems: "center",
-        },
+          marginHorizontal: 8,
+        }),
 
         tabBarIconStyle: {
-          marginTop: 4,
+          marginTop: 2,
         },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
-
+          title: "Inicio",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
+            <Ionicons name="home" size={size - 2} color={color} />
           ),
         }}
       />
@@ -73,10 +65,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="goals"
         options={{
-          title: "Goals",
-
+          title: "Metas",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="flag" size={size} color={color} />
+            <Ionicons name="flag" size={size - 2} color={color} />
           ),
         }}
       />
@@ -84,10 +75,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="stats"
         options={{
-          title: "Stats",
-
+          title: "Estadísticas",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="bar-chart" size={size} color={color} />
+            <Ionicons name="bar-chart" size={size - 2} color={color} />
           ),
         }}
       />
@@ -95,10 +85,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="challenges"
         options={{
-          title: "Challenges",
-
+          title: "Retos",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="trophy" size={size} color={color} />
+            <Ionicons name="trophy" size={size - 2} color={color} />
           ),
         }}
       />

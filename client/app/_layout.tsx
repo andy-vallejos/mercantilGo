@@ -13,7 +13,6 @@ export default function RootLayout() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔐 escuchar sesión Firebase
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
       setUser(u);
@@ -23,24 +22,21 @@ export default function RootLayout() {
     return unsub;
   }, []);
 
-  // 🔒 control de rutas (PROTECCIÓN REAL)
   useEffect(() => {
     if (loading) return;
 
     const inAuthGroup = segments[0] === "(auth)";
 
-    // ❌ no logueado → solo login
     if (!user && !inAuthGroup) {
       router.replace("/(auth)/login");
     }
 
-    // ❌ logueado → no puede volver a login
+
     if (user && inAuthGroup) {
       router.replace("/(tabs)");
     }
   }, [user, segments, loading]);
 
-  // ⏳ loading inicial
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: "center" }}>
@@ -55,7 +51,6 @@ export default function RootLayout() {
         <Stack.Screen name="index" />
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="modal" />
         <Stack.Screen name="user-info" />
       </Stack>
 

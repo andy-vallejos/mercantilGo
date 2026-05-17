@@ -19,8 +19,6 @@ export default function UserInfo() {
 
   return (
     <SafeAreaView style={styles.container}>
-
-      {/* HEADER */}
       <View style={styles.header}>
         <Pressable
           onPress={() => router.back()}
@@ -32,7 +30,6 @@ export default function UserInfo() {
         <Text style={styles.title}>Mi Perfil</Text>
       </View>
 
-      {/* PERFIL */}
       <View style={styles.profileCard}>
         <View style={styles.avatar}>
           <Text style={styles.avatarText}>CP</Text>
@@ -41,8 +38,6 @@ export default function UserInfo() {
         <Text style={styles.name}>Carlos Pérez</Text>
         <Text style={styles.email}>carlos@email.com</Text>
       </View>
-
-      {/* INFO */}
       <View style={styles.infoCard}>
         <Text style={styles.label}>Teléfono</Text>
         <Text style={styles.value}>+591 70000000</Text>
@@ -57,8 +52,7 @@ export default function UserInfo() {
         <Text style={styles.label}>Tipo de cuenta</Text>
         <Text style={styles.value}>Premium</Text>
       </View>
-
-      {/* LOGOUT */}
+      
       <View style={styles.buttonsContainer}>
         <Pressable style={styles.logoutBtn} onPress={handleLogout}>
           <Text style={styles.logoutText}>Cerrar sesión</Text>

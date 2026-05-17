@@ -17,6 +17,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 
+import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
+
 const { width } = Dimensions.get("window");
 
 export default function LoginScreen() {
@@ -26,6 +28,9 @@ export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+
+  const [secureText, setSecureText] = useState(true);
 
   const handleLogin = async () => {
     try {
@@ -44,17 +49,14 @@ export default function LoginScreen() {
 
       const user = userCredential.user;
 
-      // 🔐 guardar sesión (token recomendado)
       const token = await user.getIdToken();
       await AsyncStorage.setItem("userToken", token);
 
-      // opcional: recordar email
       if (rememberMe) {
         await AsyncStorage.setItem("userEmail", email);
       }
 
       Alert.alert("Bienvenido", user.email || "Usuario");
-
       router.replace("/(tabs)");
     } catch (error) {
       console.log(error);
@@ -70,7 +72,6 @@ export default function LoginScreen() {
       bounces={false}
       showsVerticalScrollIndicator={false}
     >
-      {/* HEADER */}
       <View style={styles.headerCard}>
         <Pressable style={styles.menuButton}>
           <Text style={styles.menuIcon}>≡</Text>
@@ -85,41 +86,50 @@ export default function LoginScreen() {
         <Text style={styles.userName}>Bienvenido</Text>
       </View>
 
-      {/* FORM */}
       <View style={styles.formContainer}>
-        {/* REGISTER */}
         <Pressable style={styles.registerPill}>
-          <Text style={styles.registerIcon}>˃</Text>
           <Text style={styles.registerText}>REGÍSTRATE</Text>
         </Pressable>
 
-        {/* EMAIL */}
+        {/* Campo: Usuario o Correo */}
         <View style={styles.inputWrapper}>
           <TextInput
             style={styles.input}
-            placeholder="Usuario o Correo"
+            placeholder="Correo"
             placeholderTextColor="#A1A59C"
             value={email}
             onChangeText={setEmail}
             autoCapitalize="none"
+            keyboardType="email-address"
           />
-          <Text style={styles.inputIcon}>👤</Text>
+          <MaterialCommunityIcons 
+            name="email-outline" 
+            size={20} 
+            color="#A1A59C" 
+            style={styles.inputIcon} 
+          />
         </View>
-
-        {/* PASSWORD */}
         <View style={styles.inputWrapper}>
           <TextInput
             style={styles.input}
             placeholder="Contraseña"
             placeholderTextColor="#A1A59C"
-            secureTextEntry
+            secureTextEntry={secureText}
             value={password}
             onChangeText={setPassword}
           />
-          <Text style={styles.inputIcon}>👁️</Text>
+          <Pressable 
+            style={styles.inputIcon} 
+            onPress={() => setSecureText(!secureText)}
+          >
+            <Ionicons 
+              name={secureText ? "eye-off-outline" : "eye-outline"} 
+              size={20} 
+              color="#A1A59C" 
+            />
+          </Pressable>
         </View>
 
-        {/* REMEMBER */}
         <View style={styles.rememberRow}>
           <Switch
             trackColor={{ false: "#EAECE6", true: "#9BFF42" }}
@@ -130,14 +140,12 @@ export default function LoginScreen() {
           <Text style={styles.rememberText}>Recuérdame</Text>
         </View>
 
-        {/* FORGOT */}
         <Pressable style={styles.forgotButton}>
           <Text style={styles.forgotText}>
             Recupera tu contraseña de acceso
           </Text>
         </Pressable>
 
-        {/* LOGIN BUTTON */}
         <Pressable
           style={[styles.loginButton, loading && { opacity: 0.7 }]}
           onPress={handleLogin}
@@ -149,19 +157,6 @@ export default function LoginScreen() {
             <Text style={styles.loginButtonText}>Acceder</Text>
           )}
         </Pressable>
-
-        {/* FACE ID */}
-        <Pressable style={styles.faceIdButton}>
-          <Text style={styles.faceIdIcon}>👤</Text>
-          <Text style={styles.faceIdText}>Accede con Face ID</Text>
-        </Pressable>
-      </View>
-
-      {/* BADGE */}
-      <View style={styles.floatingBadge}>
-        <Text style={styles.badgeLabel}>PUNTO</Text>
-        <Text style={styles.badgeIcon}>💬</Text>
-        <Text style={styles.badgeLabel}>RECLAMO</Text>
       </View>
     </ScrollView>
   );
@@ -172,7 +167,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFFFFF",
   },
-
   headerCard: {
     backgroundColor: "#1D3D2A",
     height: 340,
@@ -183,7 +177,6 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     position: "relative",
   },
-
   menuButton: {
     position: "absolute",
     top: 50,
@@ -195,7 +188,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 32,
   },
-
   avatarBorder: {
     width: 140,
     height: 140,
@@ -206,7 +198,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 16,
   },
-
   avatarMock: {
     width: 124,
     height: 124,
@@ -215,23 +206,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
   avatarEmoji: {
     fontSize: 50,
   },
-
   userName: {
     color: "#fff",
     fontSize: 24,
     fontWeight: "700",
   },
-
   formContainer: {
     paddingHorizontal: 32,
     alignItems: "center",
     transform: [{ translateY: -30 }],
   },
-
   registerPill: {
     backgroundColor: "#EBF1EC",
     flexDirection: "row",
@@ -242,22 +229,15 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginBottom: 24,
   },
-
-  registerIcon: {
-    fontSize: 16,
-    fontWeight: "700",
-  },
-
   registerText: {
     fontSize: 14,
     fontWeight: "700",
   },
-
   inputWrapper: {
     width: "100%",
     marginBottom: 16,
+    position: "relative",
   },
-
   input: {
     width: "100%",
     borderWidth: 1,
@@ -267,36 +247,32 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 50,
     fontSize: 15,
+    backgroundColor: "#fff",
   },
-
   inputIcon: {
     position: "absolute",
     right: 20,
     top: 18,
-    fontSize: 18,
+    justifyContent: "center",
+    alignItems: "center",
   },
-
   rememberRow: {
     flexDirection: "row",
     alignItems: "center",
     alignSelf: "flex-start",
     marginBottom: 24,
   },
-
   rememberText: {
     fontSize: 14,
     marginLeft: 10,
   },
-
   forgotButton: {
     marginBottom: 32,
   },
-
   forgotText: {
     textDecorationLine: "underline",
     fontWeight: "700",
   },
-
   loginButton: {
     backgroundColor: "#0A2A1A",
     width: "100%",
@@ -305,47 +281,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 24,
   },
-
   loginButtonText: {
     color: "#fff",
     fontWeight: "700",
   },
-
-  faceIdButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 40,
-  },
-
-  faceIdIcon: {
-    fontSize: 18,
-  },
-
-  faceIdText: {
-    marginLeft: 8,
-    fontWeight: "700",
-  },
-
-  floatingBadge: {
-    position: "absolute",
-    bottom: 16,
-    right: 16,
-    width: 68,
-    height: 68,
-    borderRadius: 34,
-    backgroundColor: "#fff",
-    borderWidth: 2,
-    borderColor: "#9BFF42",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  badgeLabel: {
-    fontSize: 8,
-    fontWeight: "800",
-  },
-
-  badgeIcon: {
-    fontSize: 14,
-  },
+ 
 });
