@@ -2,24 +2,22 @@ import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-// Paleta de colores local fija basada en el diseño de Figma
 const CONFIG = {
   colors: {
-    primary: "#133C24", // Verde oscuro profundo de las tarjetas principales
-    primaryLight: "#9BFF42", // Verde lima brillante para destacar botones y progreso
-    background: "#F8F9F6", // Fondo general claro off-white
+    primary: "#133C24",
+    primaryLight: "#9BFF42",
+    background: "#F8F9F6",
     white: "#FFFFFF",
-    text: "#13241C", // Texto principal oscuro
-    textLight: "#72776E", // Texto secundario grisáceo
-    success: "#588B25", // Verde para porcentajes positivos
-    border: "#EAECE6", // Gris claro para contornos sutiles
+    text: "#13241C",
+    textLight: "#72776E",
+    success: "#588B25",
+    border: "#EAECE6",
   },
 };
 
 export default function GoalsScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
-      {/* ==================== ANCHOR: HEADER ==================== */}
       <View style={styles.header}>
         <View style={styles.logoRow}>
           <Text style={styles.logoIcon}>📱</Text>
@@ -32,7 +30,6 @@ export default function GoalsScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContainer}
       >
-        {/* ==================== ENCABEZADO DE TEXTO ==================== */}
         <View style={styles.titleContainer}>
           <Text style={styles.mainTitle}>Tus Metas</Text>
           <Text style={styles.subtitle}>
@@ -40,7 +37,6 @@ export default function GoalsScreen() {
           </Text>
         </View>
 
-        {/* ==================== TARJETA PRINCIPAL (PS5) ==================== */}
         <View style={styles.mainCard}>
           <View style={styles.mainCardHeaderRow}>
             <Text style={styles.mainCardTagText}>META PRINCIPAL</Text>
@@ -60,27 +56,10 @@ export default function GoalsScreen() {
           <View style={styles.mainCardProgressBg}>
             <View style={[styles.mainCardProgressFill, { width: "75%" }]} />
           </View>
-
-          <View style={styles.mainCardActionRow}>
-            <Pressable
-              style={styles.mainCardButton}
-              android_ripple={{ color: "#00000015" }}
-            >
-              <Text style={styles.mainCardButtonText}>Destinar fondos</Text>
-            </Pressable>
-            <Pressable
-              style={styles.mainCardMoreButton}
-              android_ripple={{ color: "#ffffff20" }}
-            >
-              <Text style={styles.mainCardMoreButtonText}>⋮</Text>
-            </Pressable>
-          </View>
         </View>
 
-        {/* ==================== SECCIÓN: OTRAS METAS ==================== */}
         <Text style={styles.sectionTitle}>Otras metas</Text>
 
-        {/* SUBMETA 1: VIAJE */}
         <View style={styles.subCard}>
           <View style={styles.subCardHeaderRow}>
             <View style={styles.subCardTitleRow}>
@@ -101,7 +80,6 @@ export default function GoalsScreen() {
           </View>
         </View>
 
-        {/* SUBMETA 2: EMERGENCIAS */}
         <View style={styles.subCard}>
           <View style={styles.subCardHeaderRow}>
             <View style={styles.subCardTitleRow}>
@@ -122,16 +100,13 @@ export default function GoalsScreen() {
           </View>
         </View>
 
-        {/* ==================== GRID DE ACCIONES INFERIORES ==================== */}
         <View style={styles.gridContainer}>
-          {/* Tarjeta de Proyección */}
           <View style={[styles.gridCard, { backgroundColor: "#E9F5DB" }]}>
             <Text style={styles.gridIcon}>📈</Text>
             <Text style={styles.gridTitle}>Proyección</Text>
             <Text style={styles.gridSubtitle}>Meta PS5 en 2 meses</Text>
           </View>
 
-          {/* Tarjeta Agregar Meta */}
           <Pressable
             style={[
               styles.gridCard,
@@ -155,7 +130,6 @@ export default function GoalsScreen() {
           </Pressable>
         </View>
 
-        {/* ==================== ASISTENTE VIRTUAL IA ==================== */}
         <View style={styles.coachContainer}>
           <View style={styles.coachAvatarContainer}>
             <Text style={styles.coachAvatar}>🤖</Text>
@@ -173,7 +147,6 @@ export default function GoalsScreen() {
   );
 }
 
-/* ==================== ESTILOS CENTRALIZADOS INTERNOS ==================== */
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -229,8 +202,6 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     marginTop: 8,
   },
-
-  // Estilos de la Tarjeta Principal (PS5)
   mainCard: {
     backgroundColor: CONFIG.colors.primary,
     borderRadius: 28,
@@ -294,45 +265,13 @@ const styles = StyleSheet.create({
     height: 12,
     borderRadius: 6,
     backgroundColor: "rgba(255, 255, 255, 0.1)",
-    marginBottom: 20,
+    marginBottom: 0,
   },
   mainCardProgressFill: {
     height: "100%",
     backgroundColor: CONFIG.colors.primaryLight,
     borderRadius: 6,
   },
-  mainCardActionRow: {
-    flexDirection: "row",
-    gap: 12,
-  },
-  mainCardButton: {
-    flex: 1,
-    backgroundColor: CONFIG.colors.primaryLight,
-    paddingVertical: 14,
-    borderRadius: 20,
-    alignItems: "center",
-  },
-  mainCardButtonText: {
-    color: CONFIG.colors.text,
-    fontWeight: "700",
-    fontSize: 15,
-  },
-  mainCardMoreButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.3)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  mainCardMoreButtonText: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "700",
-  },
-
-  // Estilos de submetas modulares internas
   subCard: {
     backgroundColor: CONFIG.colors.white,
     borderRadius: 20,
@@ -390,8 +329,6 @@ const styles = StyleSheet.create({
     color: CONFIG.colors.textLight,
     fontWeight: "500",
   },
-
-  // Estilos Grid Inferior
   gridContainer: {
     flexDirection: "row",
     gap: 16,
@@ -422,8 +359,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "500",
   },
-
-  // Estilos Recomendación de Asistente
   coachContainer: {
     alignItems: "center",
     marginTop: 16,
