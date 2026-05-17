@@ -321,6 +321,7 @@ export default function HomeScreen() {
           </Pressable>
           <Text style={styles.detailHeaderTitle}>Detalles de Ingresos</Text>
         </View>
+
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.container}
@@ -357,25 +358,39 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.container}
       >
+        {/* HEADER */}
         <View style={styles.header}>
           <View style={styles.logoContainer}>
             <View style={styles.avatar} />
             <Text style={styles.logoText}>MercantilGo</Text>
           </View>
-          <Text style={styles.notification}>🔔</Text>
+
+          {/* 🔔 + LINK PERFIL */}
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 14 }}>
+            <Text style={styles.notification}>🔔</Text>
+
+            <Link href="/user-info" asChild>
+              <Pressable android_ripple={{ color: "#00000010" }}>
+                <Text style={styles.profileLink}>Perfil</Text>
+              </Pressable>
+            </Link>
+          </View>
         </View>
 
+        {/* WELCOME */}
         <View style={styles.welcomeContainer}>
           <Text style={styles.welcomeText}>Hola, Carlos 👋</Text>
           <Text style={styles.title}>Tu resumen diario</Text>
         </View>
 
+        {/* BALANCE */}
         <View style={styles.balanceCard}>
           <Text style={styles.balanceLabel}>SALDO DISPONIBLE</Text>
           <View style={styles.balanceRow}>
             <Text style={styles.balanceAmount}>5.420,00</Text>
             <Text style={styles.currency}>Bs</Text>
           </View>
+
           <View style={styles.actionsRow}>
             <Pressable
               style={styles.primaryButton}
@@ -395,6 +410,7 @@ export default function HomeScreen() {
           </View>
         </View>
 
+        {/* SALDO BLOQUEADO */}
         <View style={styles.blockedCard}>
           <View style={styles.lockCircle}>
             <Text>🔒</Text>
@@ -408,12 +424,37 @@ export default function HomeScreen() {
           </View>
         </View>
 
+<<<<<<< HEAD
+=======
+        {/* META */}
+        <View style={styles.goalCard}>
+          <View style={styles.goalHeader}>
+            <View>
+              <Text style={styles.goalLabel}>META ACTUAL</Text>
+              <Text style={styles.goalTitle}>PlayStation 5</Text>
+            </View>
+            <View>
+              <Text style={styles.goalLabel}>PROGRESO</Text>
+              <Text style={styles.goalProgress}>75%</Text>
+            </View>
+          </View>
+
+          <View style={styles.progressBarBackground}>
+            <View style={styles.progressBarFill} />
+          </View>
+
+          <View style={styles.progressValues}>
+            <Text style={styles.progressMin}>0 Bs</Text>
+            <Text style={styles.progressMax}>2.000 Bs</Text>
+          </View>
+        </View>
+
+        {/* INGRESOS */}
+>>>>>>> fa438da15904ee1d05e21fc629d5f3b7cd69a316
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Ingresos Recientes</Text>
-          <Pressable
-            onPress={() => setShowDetails(true)}
-            android_ripple={{ color: "#00000010" }}
-          >
+
+          <Pressable onPress={() => setShowDetails(true)}>
             <Text style={styles.seeAll}>Ver todos</Text>
           </Pressable>
         </View>
@@ -440,10 +481,10 @@ export default function HomeScreen() {
           <Text style={styles.transactionAmount}>+200 Bs</Text>
         </View>
 
+        {/* MENSAJE */}
         <View style={styles.messageCard}>
           <Text style={styles.messageText}>
-            ¡Vas por buen camino, Carlos! Tu meta del PS5 está cada vez más
-            cerca.
+            ¡Vas por buen camino, Carlos! Tu meta del PS5 está cada vez más cerca.
           </Text>
         </View>
       </ScrollView>
@@ -488,6 +529,16 @@ const styles = StyleSheet.create({
   notification: {
     fontSize: 22,
   },
+<<<<<<< HEAD
+=======
+
+  profileLink: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#0A2A1A",
+  },
+
+>>>>>>> fa438da15904ee1d05e21fc629d5f3b7cd69a316
   welcomeContainer: {
     marginBottom: 24,
   },
@@ -1001,6 +1052,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginTop: -2,
   },
+<<<<<<< HEAD
   qrSectionLabel: {
     fontSize: 18,
     fontWeight: "800",
@@ -1009,3 +1061,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+=======
+});
+>>>>>>> fa438da15904ee1d05e21fc629d5f3b7cd69a316

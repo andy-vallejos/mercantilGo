@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "462602010436",
+    "project_id": "mercantilgo-data",
+    "storage_bucket": "mercantilgo-data.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462602010436:android:a288ec0c0db43b98442111",
+        "android_client_info": {
+          "package_name": "com.mercantilgo.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462602010436-opkm6nctj8jri3p0l93vfvp5knrp58fg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfa2HTSWTYPbZ0OZ07TL_CVZcL3N-rO1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462602010436-opkm6nctj8jri3p0l93vfvp5knrp58fg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
