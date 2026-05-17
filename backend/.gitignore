@@ -1,1 +1,2 @@
-/server/config/*.json
+node_modules/
+backend/server/config/*.json
